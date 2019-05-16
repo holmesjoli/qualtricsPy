@@ -96,27 +96,23 @@ class params(credentials):
         self.authHeader = twoFactorOauth().authHeader
 
 
-class surveyEndpoint(object):
-
-    def __init__(self, dataCenter):
-        """
-        Create the endpoint for the survey api
-        :param dataCenter: the qualtrics data center, e.g. co1, ca1
-        :type dataCenter: str
-        """
-        self.endpoint = "https://{0}.qualtrics.com/API/v3/surveys/"
-        self.endpoint = self.endpoint.format(self.dataCenter)
+def surveyEndpoint(dataCenter):
+    """
+    Create the endpoint for the survey api
+    :param dataCenter: the qualtrics data center, e.g. co1, ca1
+    :type dataCenter: str
+    """
+    e = "https://{}.qualtrics.com/API/v3/surveys/"
+    return e.format(dataCenter)
 
 
-class surveyDefinitionEndpoint(object):
-
-    def __init__(self, dataCenter, surveyId):
-        """
-        Create the endpoint for the survey-definition api
-        :param dataCenter: the qualtrics data center, e.g. co1, ca1
-        :type dataCenter: str
-        :param surveyId: the id of the survey that will be updated
-        :type surveyId: str
-        """
-        self.endpoint = "https://{}.qualtrics.com/API/v3/survey-definitions/{}/questions"
-        self.endpoint = self.endpoint.format(self.dataCenter, self.surveyId)
+def surveyDefinitionEndpoint(dataCenter, surveyId):
+    """
+    Create the endpoint for the survey-definition api
+    :param dataCenter: the qualtrics data center, e.g. co1, ca1
+    :type dataCenter: str
+    :param surveyId: the id of the survey that will be updated
+    :type surveyId: str
+    """
+    e = "https://{}.qualtrics.com/API/v3/survey-definitions/{}/questions"
+    return e.format(dataCenter, surveyId)
