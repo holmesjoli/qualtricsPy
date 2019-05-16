@@ -1,4 +1,3 @@
-import requests
 from qualtricsPy.utils import params, config, post, surveyEndpoint
 
 
