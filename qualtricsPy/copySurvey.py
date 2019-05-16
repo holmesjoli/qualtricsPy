@@ -1,14 +1,27 @@
 import requests
-from qualtricsPy.utils import params
+from qualtricsPy.utils import params, config
 
 
-class copySurvey(params):
+class copySurveyParams(config):
+
+    def __init__(self):
+        """
+        Initializes the copy survey parameters
+        """
+        config.__init__(self)
+        self.surveyId = self.copySurvey["id"]
+        self.surveyName = self.copySurvey["name"]
+
+
+class copySurvey(params, copySurveyParams):
 
     def __init__(self):
         """
         Copys the survey and renames it
         """
         params.__init__(self)
+        copySurveyParams.__init__(self)
+
         self.data = {"projectName": self.surveyName}
         self.headers = {"content-type": "application/json",
                         "x-copy-source": self.surveyId,
