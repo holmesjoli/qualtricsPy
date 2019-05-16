@@ -1,5 +1,35 @@
 copySurvey:
   id: ""
   name: ""
+updateSurvey:
+  id: "" 
+  name: ""
+  active: ""
 addQuestion:
   id: ""
+  qs:
+    q1: 
+      QuestionText: "Color?"
+      DataExportTag: "Q1"
+      QuestionType: "MC"
+      Selector: "SAVR"
+      SubSelector: "TX"
+      Configuration: 
+        QuestionDescriptionOption: "UseText"
+      QuestionDescription: "Color?"
+      Choices:
+        1:
+          Display: "red"
+        2:
+          Display: "blue"
+      ChoiceOrder: [1,2]
+      Validation: 
+        Settings: 
+          ForceResponse: "OFF"
+          ForceResponseType: "ON"
+          Type: "None"
+      Language: []
+      NextChoiceId: 3
+      NextAnswerId: 1
+      QuestionID: "QID1"
+      QuestionText_Unsafe: "Color?"
