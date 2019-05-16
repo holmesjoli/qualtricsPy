@@ -1,5 +1,5 @@
 import requests
-from qualtricsPy.utils import params, config, post
+from qualtricsPy.utils import params, config, post, surveyEndpoint
 
 
 class updateSurveyParams(params, config):
@@ -11,10 +11,11 @@ class updateSurveyParams(params, config):
         params.__init__(self)
         config.__init__(self)
         self.surveyId = self.updateSurvey["id"]
-        self.surveyName = self.surveyName["name"]
-        self.endpoint = "https://{0}.qualtrics.com/API/v3/surveys/{1}"
-        self.endpoint = self.endpoint.format(self.dataCenter, self.surveyId)
-        self.data = {"projectName": self.surveyName}
+        self.surveyName = self.updateSurvey["name"]
+        self.active = self.updateSurvey["active"]
+        self.endpoint = surveyEndpoint(self.dataCenter, self.surveyId)
+        self.data = {"name": self.surveyName,
+                     "isActive": self.active}
         self.headers = {"content-type": "application/json"}
         self.headers.update(self.authHeader)
 
