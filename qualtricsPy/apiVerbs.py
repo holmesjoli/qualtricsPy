@@ -40,9 +40,9 @@ def put(endpoint, data, headers):
     """
     PUT TO API
     """
-    response = requests.post(url=endpoint,
-                             json=data,
-                             headers=headers)
+    response = requests.put(url=endpoint,
+                            json=data,
+                            headers=headers)
 
     if response.status_code == requests.codes.ok:
         print(response.text)
