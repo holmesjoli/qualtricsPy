@@ -3,19 +3,6 @@ import requests
 from utilsPy.config import read_yaml
 
 
-class config(object):
-
-    def __init__(self):
-        """
-        Initiates the configuration class
-        """
-        self.config = read_yaml("config.yaml")
-        self.copySurvey = self.config["copySurvey"]
-        self.updateSurvey = self.config["updateSurvey"]
-        self.addQuestion = self.config["addQuestion"]
-        self.getSurvey = self.config["getSurvey"]
-
-
 class credentials(object):
 
     def __init__(self):
