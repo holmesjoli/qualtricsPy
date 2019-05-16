@@ -9,34 +9,43 @@ class config(object):
         """
         Initiates the configuration class
         """
-        config = read_yaml("config.yaml")
-        self.userId = config["qualtrics"]["userId"]
-        self.dataCenter = config["qualtrics"]["dataCenter"]
-        self.clientId = config["qualtrics"]["client"]["id"]
-        self.clientSecret = config["qualtrics"]["client"]["secret"]
-        self.surveyId = config["qualtrics"]["copySurvey"]["id"]
-        self.surveyName = config["qualtrics"]["copySurvey"]["name"]
-        self.token = config["qualtrics"]["token"]
+        self.config = read_yaml("config.yaml")
+        self.copySurvey = self.config["copySurvey"]
+        self.addQuestion = self.config["addQuestion"]
 
 
-class tokenAuth(config):
+class credentials(object):
+
+    def __init__(self):
+        """
+        Initiates the credential configuration class.
+        """
+        cred = read_yaml("qualtricsCredentials.yaml")
+        self.userId = cred["userId"]
+        self.dataCenter = cred["dataCenter"]
+        self.clientId = cred["client"]["id"]
+        self.clientSecret = cred["client"]["secret"]
+        self.token = cred["token"]
+
+
+class tokenAuth(credentials):
 
     def __init__(self):
         """
         Initiats the token authentication header class
         """
-        config.__init__(self)
+        credentials.__init__(self)
 
         self.authHeader = {"x-api-token": self.token}
 
 
-class twoFactorOauth(config):
+class twoFactorOauth(credentials):
 
     def __init__(self):
         """
         Returns the token for two-factor authentication from qualtrics.
         """
-        config.__init__(self)
+        credentials.__init__(self)
 
         self.endpoint = "https://{0}.qualtrics.com/oauth2/token"
         self.endpoint = self.endpoint.format(self.dataCenter)
@@ -52,12 +61,13 @@ class twoFactorOauth(config):
         else:
             self.response.raise_for_status()
 
-        self.authHeader = {"authorization": "bearer {}".format(self.accessToken)}
+        self.authHeader = {"authorization":
+                           "bearer {}".format(self.accessToken)}
 
 
-class params(config):
+class params(credentials):
 
     def __init__(self):
 
-        config.__init__(self)
+        credentials.__init__(self)
         self.authHeader = twoFactorOauth().authHeader
