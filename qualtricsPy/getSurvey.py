@@ -1,5 +1,6 @@
 from qualtricsPy.utils import params, config, \
-    get, surveyEndpoint
+     surveyEndpoint
+from qualtricsPy.apiVerbs import get
 
 
 class getSurveyParams(params, config):

@@ -1,4 +1,5 @@
-from qualtricsPy.utils import params, config, post
+from qualtricsPy.utils import params, config
+from qualtricsPy.apiVerbs import post
 
 
 class createQuestionParams(params, config):

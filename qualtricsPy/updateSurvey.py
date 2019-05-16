@@ -1,4 +1,5 @@
-from qualtricsPy.utils import params, config, post, surveyEndpoint
+from qualtricsPy.utils import params, config, surveyEndpoint
+from qualtricsPy.apiVerbs import put
 
 
 class updateSurveyParams(params, config):
@@ -26,4 +27,4 @@ class updateSurvey(updateSurveyParams):
         Updates an existing survey's metadata
         """
         updateSurveyParams.__init__(self)
-        post(self.endpoint, self.data, self.headers)
+        put(self.endpoint, self.data, self.headers)
