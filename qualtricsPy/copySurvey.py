@@ -1,5 +1,4 @@
-import requests
-from qualtricsPy.utils import params, config, post, surveyEndpoint
+from qualtricsPy.utils import params, config, post, endpoint
 
 
 class copySurveyParams(params, config):
@@ -12,12 +11,12 @@ class copySurveyParams(params, config):
         config.__init__(self)
         self.surveyId = self.copySurvey["id"]
         self.surveyName = self.copySurvey["name"]
-        self.endpoint = surveyEndpoint(self.dataCenter)
+        self.endpoint = endpoint(self.dataCenter)
         self.data = {"projectName": self.surveyName}
         self.headers = {"content-type": "application/json",
                         "x-copy-source": self.surveyId,
-                        "x-copy-destination": self.userId,
-                        "X-copy-destination-owner": self.userId}
+                        "x-copy-destination": self.ownerId,
+                        "X-copy-destination-owner": self.ownerId}
         self.headers.update(self.authHeader)
 
 
