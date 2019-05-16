@@ -1,18 +1,19 @@
-from qualtricsPy.utils import params, config, surveyEndpoint
+from qualtricsPy.utils import params, surveyEndpoint
 from qualtricsPy.apiVerbs import put
 
 
-class updateSurveyParams(params, config):
+class updateSurveyParams(params):
 
-    def __init__(self):
+    def __init__(self, config):
         """
         Initializes the copy survey parameters
+        :param config: the configuration file
+        :type config: dct
         """
         params.__init__(self)
-        config.__init__(self)
-        self.surveyId = self.updateSurvey["id"]
-        self.surveyName = self.updateSurvey["name"]
-        self.active = self.updateSurvey["active"]
+        self.surveyId = config["id"]
+        self.surveyName = config["name"]
+        self.active = config["active"]
         self.endpoint = surveyEndpoint(self.dataCenter, self.surveyId)
         self.data = {"name": self.surveyName,
                      "isActive": self.active}
@@ -22,9 +23,11 @@ class updateSurveyParams(params, config):
 
 class updateSurvey(updateSurveyParams):
 
-    def __init__(self):
+    def __init__(self, config):
         """
         Updates an existing survey's metadata
+        :param config: the configuration file
+        :type config: dct
         """
-        updateSurveyParams.__init__(self)
+        updateSurveyParams.__init__(self, config)
         put(self.endpoint, self.data, self.headers)
