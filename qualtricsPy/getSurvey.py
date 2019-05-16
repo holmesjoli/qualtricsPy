@@ -21,6 +21,3 @@ class getSurvey(getSurveyParams):
         """
         getSurveyParams.__init__(self)
         get(self.endpoint, self.headers)
-
-
-
