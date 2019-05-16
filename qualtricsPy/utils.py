@@ -3,6 +3,20 @@ import requests
 from utilsPy.config import read_yaml
 
 
+def get(endpoint, headers):
+    """
+    GET to the API
+    """
+    response = requests.get(url=endpoint,
+                            headers=headers)
+
+    if response.status_code == requests.codes.ok:
+        print(response.text)
+    else:
+        print(response.text)
+        # self.response.raise_for_status()
+
+
 def post(endpoint, data, headers):
     """
     Posts to the API
@@ -13,7 +27,6 @@ def post(endpoint, data, headers):
     :param headers: the headers to post
     :type headers: dct
     """
-
     response = requests.post(url=endpoint,
                              json=data,
                              headers=headers)
@@ -35,6 +48,7 @@ class config(object):
         self.copySurvey = self.config["copySurvey"]
         self.updateSurvey = self.config["updateSurvey"]
         self.addQuestion = self.config["addQuestion"]
+        self.getSurvey = self.config["getSurvey"]
 
 
 class credentials(object):
@@ -44,7 +58,8 @@ class credentials(object):
         Initiates the credential configuration class.
         """
         cred = read_yaml("qualtricsCredentials.yaml")
-        self.userId = cred["userId"]
+        self.ownerId = cred["ownerId"]
+        self.organizationId = cred["organizationId"]
         self.dataCenter = cred["dataCenter"]
         self.clientId = cred["client"]["id"]
         self.clientSecret = cred["client"]["secret"]
@@ -96,7 +111,7 @@ class params(credentials):
         self.authHeader = twoFactorOauth().authHeader
 
 
-def surveyEndpoint(dataCenter):
+def endpoint(dataCenter):
     """
     Create the endpoint for the survey api
     :param dataCenter: the qualtrics data center, e.g. co1, ca1
@@ -104,6 +119,18 @@ def surveyEndpoint(dataCenter):
     """
     e = "https://{}.qualtrics.com/API/v3/surveys/"
     return e.format(dataCenter)
+
+
+def surveyEndpoint(dataCenter, surveyId):
+    """
+    Create the endpoint for the survey api for a specific survey
+    :param dataCenter: the qualtrics data center, e.g. co1, ca1
+    :type dataCenter: str
+    :param surveyId: the id of the survey that will be updated
+    :type surveyId: str
+    """
+    e = "https://{}.qualtrics.com/API/v3/surveys/{}"
+    return e.format(dataCenter, surveyId)
 
 
 def surveyDefinitionEndpoint(dataCenter, surveyId):
