@@ -1,8 +1,8 @@
 import requests
-from qualtricsPy.utils import params, config
+from qualtricsPy.utils import params, config, post
 
 
-class copySurveyParams(config):
+class copySurveyParams(params, config):
 
     def __init__(self):
         """
@@ -22,19 +22,11 @@ class copySurveyParams(config):
         self.headers.update(self.authHeader)
 
 
-class copySurvey(params, copySurveyParams):
+class copySurvey(copySurveyParams):
 
     def __init__(self):
         """
         Copys the survey and renames it
         """
         copySurveyParams.__init__(self)
-
-        self.response = requests.post(url=self.endpoint,
-                                      json=self.data,
-                                      headers=self.headers)
-
-        if self.response.status_code == requests.codes.ok:
-            pass
-        else:
-            self.response.raise_for_status()
+        post(self.endpoint, self.data, self.headers)
