@@ -5,7 +5,7 @@ class copySurveyParams(params, config):
 
     def __init__(self):
         """
-        Initializes the copy survey parameters
+        Initializes the copy survey parameters class.
         """
         params.__init__(self)
         config.__init__(self)

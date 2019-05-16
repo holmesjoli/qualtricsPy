@@ -6,6 +6,7 @@ class getSurveyParams(params, config):
 
     def __init__(self):
         """
+        Initializes the get survey parameters class.
         """
         params.__init__(self)
         config.__init__(self)
@@ -18,6 +19,7 @@ class getSurvey(getSurveyParams):
 
     def __init__(self):
         """
+        Returns attributes about the specified survey.
         """
         getSurveyParams.__init__(self)
         get(self.endpoint, self.headers)
