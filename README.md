@@ -11,6 +11,27 @@
 
 ## Example code
 
+```yaml
+copySurvey:
+  id: 
+  name: "NEW NAME"
+getSurvey:
+  id: 
+updateSurvey:
+  id: 
+  name: "NEW NAME"
+  active: False
+createQuestion:
+  id: 
+  question:
+    QuestionText: "<div> </div>\n\n<div> </div>\n\n<div> </div>\n\n<table class=\"UserTable\" border=\"2px\">\n <tbody>\n  <tr>\n   <td> </td>\n   <td style=\"font-weight: bolder; font-size: 14px; text-align: center;\">Option 1</td>\n   <td style=\"font-weight: bolder; font-size: 14px; text-align: center;\">Option 2</td>\n   <td style=\"font-weight: bolder; font-size: 14px; text-align: center;\">None</td>\n  </tr>\n  <tr>\n   <td style=\"font-weight: bolder; font-size: 14px;\">Program Description</td>\n   <td><span style=\"font-size:12.0pt\">A {}-year, 45 credit, evening program that would allow you to work while you study. </span></td>\n   <td><span style=\"font-size:12.0pt\">A {}-year, 30 credit, day program that would not allow you to work while you study.</span></td>\n   <td rowspan=\"3\">I prefer not to enroll in any of these two programs.</td>\n  </tr>\n  <tr>\n   <td style=\"font-weight: bolder; font-size: 14px;\">Tuition</td>\n   <td>${} per year; total cost is ${}.</td>\n   <td>${} per year; total cost is ${}.</td>\n  </tr>\n  <tr>\n   <td style=\"font-weight: bolder; font-size: 14px;\">Expected Salary Increase</td>\n   <td>${}</td>\n   <td>${}</td>\n  </tr>\n  <tr>\n   <td> </td>\n   <td><input class=\"sneakyButton\" id=\"1\" name=\"craigsmom\" type=\"radio\"></td>\n   <td><input class=\"sneakyButton\" id=\"2\" name=\"craigsmom\" type=\"radio\"></td>\n   <td><input class=\"sneakyButton\" id=\"3\" name=\"craigsmom\" type=\"radio\"></td>\n  </tr>\n </tbody>\n</table><style type=\"text/css\">.QuestionText{{\ntext-align: center;\n}}\n.UserTable td{{\npadding: 5px;\nwidth: 650px;\n}}\n.LargeText{{\nfont-weight: bolder;\n}}\n</style>"
+    QuestionType: DB
+    Selector: TB
+    SubSelector: Null
+
+
+```
+
 ```python
 import pandas as pd
 
@@ -33,8 +54,6 @@ class config(object):
         self.getSurvey = self.config["getSurvey"]
         self.updateSurvey = self.config["updateSurvey"]
         self.createQuestion = self.config["addQuestion"]
-
-        self.mp = pd.read_csv("C:/Users/jh111/Projects/Packages/Python/qualtrics_automation/masters_program/master_program.csv")
 
 
 class main(config):
