@@ -1,18 +1,33 @@
 import requests
+import pprint
+import json
+
+
+def apiLogic(response):
+    """
+    Per
+    :param response: the response from the API
+    :type response: object
+    """
+
+    if response.status_code == requests.codes.ok:
+        print(response.text)
+    else:
+        response.raise_for_status()
 
 
 def get(endpoint, headers):
     """
     GET to the API
+    :param endpoint: the endpoint of the post call
+    :type endpoint: string
+    :param headers: the headers to post
+    :type headers: dct
     """
     response = requests.get(url=endpoint,
                             headers=headers)
 
-    if response.status_code == requests.codes.ok:
-        print(response.text)
-    else:
-        print(response.text)
-        # self.response.raise_for_status()
+    apiLogic(response)
 
 
 def post(endpoint, data, headers):
@@ -29,11 +44,7 @@ def post(endpoint, data, headers):
                              json=data,
                              headers=headers)
 
-    if response.status_code == requests.codes.ok:
-        print(response.text)
-    else:
-        print(response.text)
-        # self.response.raise_for_status()
+    apiLogic(response)
 
 
 def put(endpoint, data, headers):
@@ -44,8 +55,4 @@ def put(endpoint, data, headers):
                             json=data,
                             headers=headers)
 
-    if response.status_code == requests.codes.ok:
-        print(response.text)
-    else:
-        print(response.text)
-        # self.response.raise_for_status()
+    apiLogic(response)
