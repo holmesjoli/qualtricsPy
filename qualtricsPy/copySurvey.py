@@ -1,5 +1,6 @@
-from qualtricsPy.utils import params, endpoint
+from qualtricsPy.utils import params
 from qualtricsPy.apiVerbs import post
+from qualtricsPy.endpoints import endpoint
 
 
 class copySurveyParams(params):
