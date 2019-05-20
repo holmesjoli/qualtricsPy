@@ -15,8 +15,9 @@ class createQuestionParams(params):
 
         self.surveyId = config["id"]
         self.data = config["question"]
-        self.endpoint = surveyDefinitionEndpoint(self.dataCenter,
-                                                 self.surveyId)
+        self.endpoint = "{}{}".format(surveyDefinitionEndpoint(self.dataCenter,
+                                                               self.surveyId),
+                                      "/questions")
         self.headers = {"accept": "application/json",
                         "content-type": "application/json"}
         self.headers.update(self.authHeader)
